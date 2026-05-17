@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+    /* Midnight Intelligence Colors */
+    --color-background: #0B1020;
+    --color-foreground: #F8FAFC;
+    
+    --color-primary: #6366F1;
+    --color-primary-foreground: #FFFFFF;
+    
+    --color-secondary: #22D3EE;
+    --color-secondary-foreground: #0B1020;
+    
+    --color-tertiary: #ffb783;
+    --color-tertiary-foreground: #4f2500;
+
+    --color-muted: #121826;
+    --color-muted-foreground: #94A3B8;
+    
+    --color-accent: #1E293B;
+    --color-accent-foreground: #F8FAFC;
+    
+    --color-popover: #0B1020;
+    --color-popover-foreground: #F8FAFC;
+    
+    --color-card: #121826;
+    --color-card-foreground: #F8FAFC;
+    
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-input: rgba(255, 255, 255, 0.05);
+    --color-ring: #6366F1;
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
+    --radius-full: 9999px;
+
+    --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  :root {
+    --background: #0B1020;
+    --foreground: #F8FAFC;
+    --primary: #6366F1;
+    --primary-foreground: #FFFFFF;
+    --secondary: #22D3EE;
+    --secondary-foreground: #0B1020;
+    --muted: #121826;
+    --muted-foreground: #94A3B8;
+    --accent: #1E293B;
+    --accent-foreground: #F8FAFC;
+    --card: #121826;
+    --card-foreground: #F8FAFC;
+    --popover: #0B1020;
+    --popover-foreground: #F8FAFC;
+    --border: rgba(255, 255, 255, 0.1);
+    --input: rgba(255, 255, 255, 0.05);
+    --ring: #6366F1;
+    
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.05) transparent;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/30 selection:text-primary;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(18, 24, 38, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .ambient-glow {
+    box-shadow: 0 40px 60px -15px rgba(99, 102, 241, 0.15);
+  }
+
+  .ai-pulse {
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Global scrollbar style for the whole document */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0B1020;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.1); /* Subtle primary color */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.02);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.2);
+  }
+}

@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Main Application Server (FastAPI)
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      - db
+      - redis
+      - qdrant
+      - nats
+    networks:
+      - humanloop-net
+
+  # Core Relational Database
+  db:
+    image: postgres:15-alphine
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: humanloop_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - humanloop-net
+
+  # Distributed Cache & WebSocket state
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    networks:
+      - humanloop-net
+
+  # Vector Search Engine
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - humanloop-net
+
+  # Lightweight Event Mesh
+  nats:
+    image: nats:alpine
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    networks:
+      - humanloop-net
+
+  # Async Workers (Ingestion & Memory Synthesis)
+  worker:
+    build: .
+    command: python -m app.workers.run
+    depends_on:
+      - api
+      - nats
+    networks:
+      - humanloop-net
+
+networks:
+  humanloop-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+  qdrant_storage:
