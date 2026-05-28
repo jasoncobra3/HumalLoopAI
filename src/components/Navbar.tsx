@@ -20,11 +20,13 @@ export function Navbar() {
         </div>
         
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" className="hidden sm:flex border-white/10 hover:bg-white/5">
-            Log In
-          </Button>
-          <Link to="/onboarding">
-            <Button size="sm" className="bg-primary text-primary-foreground hover:brightness-110">
+          <Link to="/login">
+            <Button variant="outline" size="sm" className="hidden sm:flex border-white/10 hover:bg-white/5 cursor-pointer">
+              Log In
+            </Button>
+          </Link>
+          <Link to="/login?mode=signup">
+            <Button size="sm" className="bg-primary text-primary-foreground hover:brightness-110 cursor-pointer">
               Deploy Model
             </Button>
           </Link>

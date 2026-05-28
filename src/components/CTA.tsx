@@ -20,8 +20,8 @@ export function CTA() {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
-          <Link to="/onboarding">
-            <Button size="lg" className="h-16 px-12 rounded-2xl text-lg font-bold bg-primary text-primary-foreground hover:scale-[1.02] transition-transform shadow-2xl">
+          <Link to="/login?mode=signup">
+            <Button size="lg" className="h-16 px-12 rounded-2xl text-lg font-bold bg-primary text-primary-foreground hover:scale-[1.02] transition-transform shadow-2xl cursor-pointer">
               Get Started Today
             </Button>
           </Link>
